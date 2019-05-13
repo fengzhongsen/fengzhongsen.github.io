@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web前端,JavaScript,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="老冯博客" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="前言：JavaScript知识笔记细碎，对于初学者来说，学完基本语法就不知道该怎么深入学习了。这篇博客只针对初学JavaScript的同学学完基本语法后的“进一步”深入学习。当然，这不是JavaScript的全部，在末尾我会给出“再进一步”的学习方向。 一、JavaScript基础1、对变量提升的理解变量定义和函数声明会被提升到当前作用域的顶部2、this的应用场景  ● 作为构造函数执行  ●">
+<meta name="keywords" content="Web前端,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript之初级进阶">
+<meta property="og:url" content="http://fblog.top/2017/12/04/JavaScript之初级进阶/index.html">
+<meta property="og:site_name" content="老冯博客">
+<meta property="og:description" content="前言：JavaScript知识笔记细碎，对于初学者来说，学完基本语法就不知道该怎么深入学习了。这篇博客只针对初学JavaScript的同学学完基本语法后的“进一步”深入学习。当然，这不是JavaScript的全部，在末尾我会给出“再进一步”的学习方向。 一、JavaScript基础1、对变量提升的理解变量定义和函数声明会被提升到当前作用域的顶部2、this的应用场景  ● 作为构造函数执行  ●">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-04T08:32:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript之初级进阶">
+<meta name="twitter:description" content="前言：JavaScript知识笔记细碎，对于初学者来说，学完基本语法就不知道该怎么深入学习了。这篇博客只针对初学JavaScript的同学学完基本语法后的“进一步”深入学习。当然，这不是JavaScript的全部，在末尾我会给出“再进一步”的学习方向。 一、JavaScript基础1、对变量提升的理解变量定义和函数声明会被提升到当前作用域的顶部2、this的应用场景  ● 作为构造函数执行  ●">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fblog.top/2017/12/04/JavaScript之初级进阶/">
+
+
+
+
+
+  <title>JavaScript之初级进阶 | 老冯博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">老冯博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">老冯的个人博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://fblog.top/2017/12/04/JavaScript之初级进阶/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sunny">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老冯博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JavaScript之初级进阶</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T15:29:32+08:00">
+                2017-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术篇/" itemprop="url" rel="index">
+                    <span itemprop="name">技术篇</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/04/JavaScript之初级进阶/" class="leancloud_visitors" data-flag-title="JavaScript之初级进阶">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前言：JavaScript知识笔记细碎，对于初学者来说，学完基本语法就不知道该怎么深入学习了。这篇博客只针对初学JavaScript的同学学完基本语法后的“进一步”深入学习。当然，这不是JavaScript的全部，在末尾我会给出“再进一步”的学习方向。</p>
+<p>一、JavaScript基础<br>1、对变量提升的理解<br>变量定义和函数声明会被提升到当前作用域的顶部<br>2、this的应用场景<br>  ● 作为构造函数执行<br>  ● 作为对象属性执行<br>  ● 作为普通函数执行<br>  ● <code>call</code>、<code>apply</code>、<code>bind</code><br>3、如何理解作用域<br>  ● 自由变量<br>  ● 作用域链，及自由变量的查找<br>  ● 闭包的两个应用场景：参数作为返回值、函数作为参数传递<br>4、如何理解闭包<br>主要用于封装变量、收敛权限<br>5、同步和异步有什么区别<br>同步会阻塞代码执行，而异步不会。alert是同步，setTimeout是异步。<br>6、前端使用异步的场景<br>  ● 定时任务：setTimeout、setInterval<br>  ● 网络请求：ajax请求、动态<code>&lt;img&gt;</code>加载<br>  ● 事件绑定</p>
+<p>二、Web-API<br>1、w3c标准中关于js的规定<br>  ● DOM操作<br>  ● BOM操作<br>  ● 事件绑定<br>  ● ajax请求（包括http协议）<br>  ● 存储<br>2、DOM（Document Object Model）<br>  ● 本质：为浏览器把HTML代码结构化成浏览器可识别并且js可操作的一个模型。<br>  ● 基本数据结构：树<br>  ● 常用API：1、获取DOM节点，以及节点的property和Attribute，2、获取父节点、获取子节点，3、新增节点、删除节点<br>  ● Attribute是HTML标签的属性，property是js对象的属性<br>3、BOM（Browser Object Model）<br>  ● navigator：检测浏览器类型 navigator.userAgent<br>  ● screen：screen.width  、screen.height<br>  ● location：herf、protocol（http:  、 https:）、host、pathname、search、hash<br>  ● history：history.back() 、 history.forward()<br>4、事件<br>  ● 通用的事件监听函数<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function bindEvent(elem, type, selector, fn) &#123;</span><br><span class="line">    if(fn == null) &#123;</span><br><span class="line">        fn = selector</span><br><span class="line">        selector = null</span><br><span class="line">    &#125;</span><br><span class="line">    elem.addEventListener(type, function(e) &#123;</span><br><span class="line">        var target</span><br><span class="line">        if(selector) &#123;</span><br><span class="line">            target = e.target</span><br><span class="line">            if(target.matches(selector)) &#123;</span><br><span class="line">                fn.call(target, e)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            fn(e)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>  ● 事件冒泡流程：DOM树形结构、时间冒泡、阻止冒泡、冒泡应用<br>  ● 事件代理：代码简洁、渲染压力小<br>5、Ajax<br>  ● 手动编写ajax请求，不依赖第三方库<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest()</span><br><span class="line">xhr.open(&quot;GET&quot;, &quot;/api&quot;, false)</span><br><span class="line">xhr.onreadystatechange = function() &#123;</span><br><span class="line">    if(xhr.readyState == 4) &#123;</span><br><span class="line">        if(xhr.status == 200) &#123;</span><br><span class="line">            alert(xhr.responseText)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">xhr.send(null)</span><br></pre></td></tr></table></figure></p>
+<p>  ● XMLHttpRequest的状态码说明<br>readyState：0 - （未初始化）还没调用send()方法 ； 1 - （载入）已调用send()方法，正在发送请求；3 - （载入完成）send()方法执行完成，已经接收到全部响应内容；4 - （交互）正在解析响应内容；5 - （完成）响应内容解析完成，可以在客户端调用了。<br>status：2xx - 表示成功处理请求； 3xx - 需要重定向，浏览器直接跳转； 4xx - 客户端请求错误； 5xx - 服务器端错误<br>  ● 跨域概念：1、浏览器有同源策略，不允许Ajax访问其他域接口。2、协议、域名、端口，有一个不同就算跨域。<br>  ● 可以跨域的三个标签：<code>&lt;img src=xxx&gt;</code> 、<code>&lt;link herf=xxx&gt;</code>、<code>&lt;script src=xxx&gt;</code><br>  ● 跨域的几种实现方式：JSONP、服务器端设置http header<br>6、存储<br>  ● cookie概念：1、本身用于客户端和服务器端通信，但它有本地存储的功能，所以被借用，2、使用document.cookie = … 获取和修改，<br>  ● cookie特点：1、存储量小，只有4kb，2、所有http请求都会携带cookie，会影响获取资源的效率。3、需要封装才能使用<br>  ● <code>localStorage</code>和<code>sessionStorage</code>：HTML5专门为存储而设计，最大容量为5M，API简单易用，<code>localStorage.setItem(key, value)</code>  ， <code>localStorage.getItem(key)</code><br>  ● IOS safari 隐藏模式下 <code>localStorage.getItem</code>会报错，建议使用<code>try-catch</code>封装<br>三、开发环境<br>  ● AMD：require.js、全局define函数、全局require函数、依赖的js自动异步加载<br>  ● CommonJS：nodejs模块化规范，现在被大量使用，原因：1、前端开发依赖的插件和库都可以从npm中获取，2、构建工具的高度自动化，使得使用npm的成本非常低，3、CommonJS不会异步加载js，而是同步一次性加载出来<br>  ● AMD和CommonJS的应用场景：需要异步加载js使用AMD，使用了npm之后使用CommonJS<br>  ● 上线流程：1、将测试完成的代码体骄傲到git版本库的master分支，2、将当前服务器的代码全部打包并记录版本号，备份，3、将master分支的代码提交覆盖到线上服务器，生成新版本号。<br>  ● 回滚流程：1、将当前服务器的代码打包并记录版本号，备份，2、将备份的上一个版本号解压，覆盖到线上服务器，并生成新的版本号<br>四、运行环境<br>  ● 加载资源的形式：1、输入url（或跳转页面）加载html，2、加载html中的静态资源<br>  ● 加载资源的过程：1、浏览器根据DNS服务器得到域名的IP地址，2、像这个IP的机器发送http请求，3、服务器收到、处理并返回http请求，4、浏览器得到返回内容<br>  ● 浏览器渲染页面的过程：1、根据HTML结构生成DOM Tree，2、根据CSS生成CSSOM，3、将DOM和CSSOM整合形成RenderTree，4、根据RenderTree开始渲染和展开，5、遇到<code>&lt;script&gt;</code>时会执行并阻塞渲染。<br>  ● <code>window.onload</code>和<code>DOMContentLoaded</code>的区别：前者只全部资源加载完（包括图片、视频等异步资源）才会执行，后者是是DOM渲染完（图片、视频可能还没加载完）就执行<br>  ● 性能优化原则：1、多使用内存、缓存，2、减少CPU计算、减少网络请求<br>  ● 性能优化方法：1、加载资源优化（a、静态资源压缩合并，b、静态资源缓存，c、使用CDN让资源加载更快，d、使用SSR后端渲染，让数据直接输出到HTML中）；2、渲染优化（a、CSS放前面、JS放后面，b、懒加载，c、缓存查询，即减少DOM查询，对DOM查询做缓存，d、合并插入，即减少DOM操作，多个操作尽量放一起执行，e、事件节流，d、尽早执行操作，如DOMContentLoaded）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web前端/" rel="tag"># Web前端</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/30/JavaScript之入门探索/" rel="next" title="JavaScript之入门探索">
+                <i class="fa fa-chevron-left"></i> JavaScript之入门探索
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/16/Flex布局语法汇总/" rel="prev" title="Flex布局语法汇总">
+                Flex布局语法汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Sunny">
+            
+              <p class="site-author-name" itemprop="name">Sunny</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/fengzhongsen" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github-alt"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:fengzhongsen@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope-o"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/fengzhongsen" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/fengzhongsen" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-handshake-o"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://oricanis.github.io/" title="Orican" target="_blank">Orican</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://i-tech.tech/" title="小男神" target="_blank">小男神</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://xzzdll.cn/" title="John" target="_blank">John</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sunny</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '63ed8d11cbae20c156bc',
+          clientSecret: '2759032203ca6c6ea311f217ec02609b3b43149f',
+          repo: 'fengzhongsen.github.io',
+          owner: 'fengzhongsen',
+          admin: ['fengzhongsen'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')
+       </script>
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("GW5t3rc1EOk3R1x0Gv7TlY4s-gzGzoHsz", "9mu1GyxfVTr7PJc7iusIkcQQ");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
